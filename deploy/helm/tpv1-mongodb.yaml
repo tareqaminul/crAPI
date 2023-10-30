@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  finalizers:
+  - kubernetes.io/pv-protection
+  name: pv-mongodb
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: mongodb-pv-claim
+    namespace: crapi
+  hostPath:
+    path: /var/snap/
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Delete
+  volumeMode: Filesystem

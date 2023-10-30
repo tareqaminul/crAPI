@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  finalizers:
+  - kubernetes.io/pv-protection
+  name: pv-postgres
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: postgres-pv-claim
+    namespace: crapi
+  hostPath:
+    path: /var/snap/crapi-postgres-pv-claim-pvc
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Delete 
+  volumeMode: Filesystem
